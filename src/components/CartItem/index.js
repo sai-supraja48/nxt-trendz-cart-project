@@ -15,17 +15,18 @@ const CartItem = props => (
       } = value
 
       const {cartItemDetails} = props
+
       const {id, title, brand, quantity, price, imageUrl} = cartItemDetails
 
       const onRemoveCartItem = () => {
         removeCartItem(id)
       }
 
-      const onIncrement = () => {
+      const onIncrementCartItemQuantity = () => {
         incrementCartItemQuantity(id)
       }
 
-      const onDecrement = () => {
+      const onDecrementCartItemQuantity = () => {
         decrementCartItemQuantity(id)
       }
 
@@ -36,28 +37,27 @@ const CartItem = props => (
           <div className="cart-item-details-container">
             <div className="cart-product-title-brand-container">
               <p className="cart-product-title">{title}</p>
+
               <p className="cart-product-brand">by {brand}</p>
             </div>
 
             <div className="cart-quantity-container">
-              {/* ✅ MINUS BUTTON */}
               <button
                 type="button"
                 data-testid="minus"
                 className="quantity-controller-button"
-                onClick={onDecrement}
+                onClick={onDecrementCartItemQuantity}
               >
                 <BsDashSquare color="#52606D" size={12} />
               </button>
 
               <p className="cart-quantity">{quantity}</p>
 
-              {/* ✅ PLUS BUTTON */}
               <button
                 type="button"
                 data-testid="plus"
                 className="quantity-controller-button"
-                onClick={onIncrement}
+                onClick={onIncrementCartItemQuantity}
               >
                 <BsPlusSquare color="#52606D" size={12} />
               </button>
@@ -65,18 +65,17 @@ const CartItem = props => (
 
             <div className="total-price-remove-container">
               <p className="cart-total-price">Rs {price * quantity}/-</p>
+
+              <button
+                type="button"
+                data-testid="remove"
+                className="delete-button"
+                onClick={onRemoveCartItem}
+              >
+                <AiFillCloseCircle color="#616E7C" size={20} />
+              </button>
             </div>
           </div>
-
-          {/* ✅ REMOVE BUTTON (IMPORTANT) */}
-          <button
-            type="button"
-            data-testid="remove"
-            className="delete-button"
-            onClick={onRemoveCartItem}
-          >
-            <AiFillCloseCircle color="#616E7C" size={20} />
-          </button>
         </li>
       )
     }}
